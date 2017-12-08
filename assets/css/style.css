@@ -8,6 +8,12 @@
     margin: 0 auto;
 }
 
+h1 {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
 /**************************
     CHARACTER CARDS
 **************************/
@@ -64,10 +70,11 @@
 .zone{
     display: inline-flex;
     justify-content: space-around;
+    align-items: center;
     width: 800px;
     height: 220px;
     background-color: #cecece;
     margin: 0 0 5px 0;
-    padding: 10px;
+    border-radius: 15px;
 }
 
