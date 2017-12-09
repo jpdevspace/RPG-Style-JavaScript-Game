@@ -41,8 +41,8 @@
             }
         ],
         sub_win: 0,
-        oponent_exists: false,
-        //user_choice: "",
+        user_character: "",
+        opponent_character: "",
 
         init() {
             this.dom_cache();
@@ -51,8 +51,7 @@
 
         },
         dom_cache() {
-            // this.$character = $('.character'); 
-            // this.$attack_zone = $('#attack-zone');
+
             this.$info_zone = $('#match-info');
             this.$enemy_zone = $('#enemy-zone');
             this.$player_zone = $('#attack-player-zone');
@@ -69,7 +68,8 @@
         event_binding() {
             this.$info_zone.on('click', '.character', this.set_character.bind(this));   // User choose character from the info-zone
             this.$enemy_zone.on('click', '.character', this.set_opponent.bind(this));   // User choose oponent from the enemy-zone
-            this.$info_zone.on('click', 'button', this.attacking.bind(this)); // Attack opponent by clicking Attack button
+            this.$info_zone.on('click', 'button#attack', this.attacking.bind(this)); // Attack opponent by clicking Attack button
+            this.$info_zone.on('click', 'button#restart', this.init);
         },
         init_stats() {
             this.$hobbit_health.html(this.characters[0].health);
@@ -89,24 +89,23 @@
             this.$info_zone.html(`<h1>Choose your opponent from the bottom`);   // Update instructions
         },
         set_opponent(e){ // User choose oponent
-            // oponentExists = true
             this.$opponent_zone.append(e.currentTarget);  // move it to the attacking zone
-            this.$info_zone.html(`<button type="button">ATTACK</button>`);    // Update the instructions
+            this.$info_zone.html(`<button type="button" id="attack">ATTACK</button>`);    // Update the instructions
         },
         attacking(e){
-            const user_character = this.$player_zone.find('.character').attr('id'); // Get the ID of the user's character
-            const opponent_character = this.$opponent_zone.find('.character').attr('id'); // Get the ID of the opponents's character
+            this.user_character = this.$player_zone.find('.character').attr('id'); // Get the ID of the user's character
+            this.opponent_character = this.$opponent_zone.find('.character').attr('id'); // Get the ID of the opponents's character
             let indexOf_opponent = 0; // Create a variable to hold the opponents index in the characters array
             
             // Obtaining the opponent's index in the character's array to be identy it
             this.characters.forEach( a => { // Loop through the character's array of objects
-                if(a.name == opponent_character) {  // if the value of the property "name" of the current character object matches the opponent's ID
+                if(a.name == this.opponent_character) {  // if the value of the property "name" of the current character object matches the opponent's ID
                     indexOf_opponent = this.characters.indexOf(a);  // Get the location of that particular "character's object" in the character's array
                 }
             });
             // Actually "hitting"... Updating stats in the array. Player's power and opponent's health
             this.characters.forEach( b => { // Loop through the character's array again
-                if(b.name == user_character) {  // if the value of the property "name" of the current character object matches the player's ID
+                if(b.name == this.user_character) {  // if the value of the property "name" of the current character object matches the player's ID
                     this.characters[indexOf_opponent].health -= b.attack_power; // Reduce the opponent's health by the player's attack power amount
                     b.attack_power *= 2; // double the players attack power
                     this.init_stats();  // Display updated stats
@@ -129,45 +128,32 @@
             }
 
         },
-        // get_hit(){  
-        //     const user_character = this.$player_zone.find('.character').attr('id'); // Get the ID of the user's character
-        //     const opponent_character = this.$opponent_zone.find('.character').attr('id'); // Get the ID of the opponents's character
-        //     let indexOf_user = 0; // Create a variable to hold the opponents index in the characters array
+        get_hit(){  
+            //const user_character = this.$player_zone.find('.character').attr('id'); // Get the ID of the user's character
+            this.opponent_character = this.$opponent_zone.find('.character').attr('id'); // Get the ID of the opponents's character
+            let indexOf_user = 0; // Create a variable to hold the opponents index in the characters array
             
-        //     // Obtaining the users's index in the character's array to be identy it
-        //     this.characters.forEach( a => { // Loop through the character's array of objects
-        //         if(a.name == user_character) {  // if the value of the property "name" of the current character object matches the user's ID
-        //             indexOf_user = this.characters.indexOf(a);  // Get the location of that particular "character's object" in the character's array
-        //         }
-        //     });
-        //     // Actually "getting hit"... Updating stats in the array. Player's power and opponent's health
-        //     this.characters.forEach( b => { // Loop through the character's array again
-        //         if(b.name == opponent_character) {  // if the value of the property "name" of the current character object matches the player's ID
-        //             this.characters[indexOf_opponent].health -= b.attack_power; // Reduce the opponent's health by the player's attack power amount
-        //             b.attack_power *= 2; // double the players attack power
-        //             this.init_stats();  // Display updated stats
-        //             this.check_win(indexOf_opponent);   // Check if after the hit, the opponent still has energy or if it ran out of energy and the player won
-        //         }
+            // Obtaining the users's index in the character's array to be identy it
+            this.characters.forEach( a => { // Loop through the character's array of objects
+                if(a.name == this.user_character) {  // if the value of the property "name" of the current character object matches the user's ID
+                    indexOf_user = this.characters.indexOf(a);  // Get the location of that particular "character's object" in the character's array
+                }
+            });
+            // Actually "getting hit"... Updating stats in the array. Player's power and opponent's health
+            this.characters.forEach( b => { // Loop through the character's array again
+                if(b.name == this.opponent_character) {  // if the value of the property "name" of the current character object matches the player's ID
+                    this.characters[indexOf_user].health -= b.attack_power; // Reduce the users's health by the opponents's attack power amount
+                    this.init_stats();  // Display updated stats
+                    this.check_lose(indexOf_user);   // Check if after the hit, the user still has energy or if it ran out of energy and lose the game
+                }
 
-        //     });
-        // }
-
-
-         
-                    // if enemies health > 0 ? fire getHit() : increase subwin counter
-                    // if subwin counter == (charactersArr.length)-1 (you) ? win entire game and show restart button : getHit()
-                    // }
-                //}else{display no oponents}
-
-
-       
-
-        //4. Get hit
-            // function getHit(){
-            // reduce users health
-            // if user's health == 0 ? game over : attackOpenent()
-            //}
-
+            });
+        },
+        check_lose(indexOf_user){
+            if( this.characters[indexOf_user].health < 0 ){ // If user ran out of health
+                this.$info_zone.html(`<h1>You Lost<br>Game Over!</h1><br><button type="button" id="restart">RESTART</button>`); // Inform the user
+            }
+        }
 
     }
 
