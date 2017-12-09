@@ -5,33 +5,30 @@
     // Non-DOM-ready-required code here (scope-safe)
     $(function() {
 
-        var playerChoices = [
-            { "fighter": "maccready", "attack": "25", "hp": "180" },
-            { "fighter": "mama_murphy", "attack": "8", "hp": "120" },
-            { "fighter": "piper", "attack": "20", "hp": "150" },
-            { "fighter": "vault_tec", "attack": "5", "hp": "100" }
-        ];
-
     const game = {
         characters: [
             {
                 name: "hobbit",
                 attack_power: 5,
+                base_power: 5,
                 health: 100,
             },
             {
                 name: "orc",
                 attack_power: 25,
+                base_power: 25,
                 health: 180,
             },
             {
                 name: "elf",
                 attack_power: 8,
+                base_power: 8,
                 health: 120,
             },
             {
                 name: "dwarf",
                 attack_power: 20,
+                base_power: 20,
                 health: 150,
             }
         ],
@@ -102,7 +99,7 @@
             this.characters.forEach( b => { // Loop through the character's array again
                 if(b.name == this.user_character) {  // if the value of the property "name" of the current character object matches the player's ID
                     this.characters[indexOf_opponent].health -= b.attack_power; // Reduce the opponent's health by the player's attack power amount
-                    b.attack_power *= 2; // double the players attack power
+                    b.attack_power += b.base_power; // Increase the player's attack power
                     this.init_stats();  // Display updated stats
                     this.check_win(indexOf_opponent);   // Check if after the hit, the opponent still has energy or if it ran out of energy and the player won
                 }
