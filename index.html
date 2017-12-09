@@ -5,54 +5,79 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Cutive+Mono" rel="stylesheet">
     <!-- Own CSS -->
     <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
+    <h1 class="text-center">Battle for Middle Earth</h1>
     <div class="game-container">
-        <h1 class="text-center">Battle for Middle Earth</h1>
-        <div id="attack-zone" class="zone"></div>
-        <div id="match-info" class="zone">
-            <div id="hobbit" class="character">
-                <div class="myCard-container">
-                    <div class="myCard">
-                        <div class="myCard-img-top"></div>
-                        <p class="myCard-text">Hobbit's Info</p>
-                    </div>
+
+            <div class="row">
+                <div id="attack-zone" class="zone">
+                    <div id="attack-player-zone" class="vs"></div>
+                    <div id="attack-oponent-zone" class="vs"></div>
                 </div>
             </div>
 
-            <div id="orc" class="character">
-                <div class="myCard-container">
-                    <div class="myCard">
-                        <div class="myCard-img-top"></div>
-                        <p class="myCard-text">Orc's Info</p>
+            <div class="row">
+                <div id="match-info" class="zone">
+                    <div id="hobbit" class="character">
+                        <div class="myCard-container">
+                            <div class="myCard">
+                                <div class="myCard-img-top"></div>
+                                <p class="myCard-text"><strong>Hobbit</strong> <br> 
+                                    Power: <span class="power"></span><br>
+                                    Health: <span class="health"></span>
+                                    
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div id="orc" class="character">
+                        <div class="myCard-container">
+                            <div class="myCard">
+                                <div class="myCard-img-top"></div>
+                                <p class="myCard-text"><strong>Orc</strong><br> 
+                                    Power: <span class="power"></span><br>
+                                    Health: <span class="health"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="elf" class="character">
+                        <div class="myCard-container">
+                            <div class="myCard">
+                                <div class="myCard-img-top"></div>
+                                <p class="myCard-text"><strong>Elf</strong><br> 
+                                    Power: <span class="power"></span><br>
+                                    Health: <span class="health"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dwarf" class="character">
+                        <div class="myCard-container">
+                            <div class="myCard">
+                                <div class="myCard-img-top"></div>
+                                <p class="myCard-text"><strong>Dwarf</strong><br> 
+                                    Power: <span class="power"></span><br>
+                                    Health: <span class="health"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
 
-            <div id="elf" class="character">
-                <div class="myCard-container">
-                    <div class="myCard">
-                        <div class="myCard-img-top"></div>
-                        <p class="myCard-text">Elf's Info</p>
-                    </div>
-                </div>
+            <div class="row">
+                <div id="enemy-zone" class="zone"></div>
             </div>
-
-            <div id="dwarf" class="character">
-                <div class="myCard-container">
-                    <div class="myCard">
-                        <div class="myCard-img-top"></div>
-                        <p class="myCard-text">Dwarf's Info</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <div id="enemy-zone" class="zone"></div>
     </div><!-- ./container -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
