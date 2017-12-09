@@ -5,39 +5,34 @@
     // Non-DOM-ready-required code here (scope-safe)
     $(function() {
 
+        var playerChoices = [
+            { "fighter": "maccready", "attack": "25", "hp": "180" },
+            { "fighter": "mama_murphy", "attack": "8", "hp": "120" },
+            { "fighter": "piper", "attack": "20", "hp": "150" },
+            { "fighter": "vault_tec", "attack": "5", "hp": "100" }
+        ];
+
     const game = {
         characters: [
             {
                 name: "hobbit",
                 attack_power: 5,
-                counter_power: 10,
                 health: 100,
-                is_enemy: false,
-                chosen: false,
             },
             {
                 name: "orc",
-                attack_power: 20,
-                counter_power: 25,
-                health: 50,
-                is_enemy: false,
-                chosen: false,
+                attack_power: 25,
+                health: 180,
             },
             {
                 name: "elf",
-                attack_power: 10,
-                counter_power: 15,
-                health: 180,
-                is_enemy: false,
-                chosen: false,
+                attack_power: 8,
+                health: 120,
             },
             {
                 name: "dwarf",
-                attack_power: 15,
-                counter_power: 20,
+                attack_power: 20,
                 health: 150,
-                is_enemy: false,
-                chosen: false,
             }
         ],
         sub_win: 0,
@@ -48,10 +43,10 @@
             this.dom_cache();
             this.event_binding();
             this.init_stats();
+            this.ta_instructions();
 
         },
         dom_cache() {
-
             this.$info_zone = $('#match-info');
             this.$enemy_zone = $('#enemy-zone');
             this.$player_zone = $('#attack-player-zone');
@@ -69,7 +64,7 @@
             this.$info_zone.on('click', '.character', this.set_character.bind(this));   // User choose character from the info-zone
             this.$enemy_zone.on('click', '.character', this.set_opponent.bind(this));   // User choose oponent from the enemy-zone
             this.$info_zone.on('click', 'button#attack', this.attacking.bind(this)); // Attack opponent by clicking Attack button
-            this.$info_zone.on('click', 'button#restart', this.init);
+            this.$info_zone.on('click', 'button#restart', this.restart);
         },
         init_stats() {
             this.$hobbit_health.html(this.characters[0].health);
@@ -120,7 +115,7 @@
                 this.sub_win++; // Update partial win counter.
                 this.$opponent_zone.find('.character').remove(); // Remove the character from the screen
                 if( this.sub_win == (this.characters.length - 1) ){ // If user beat all opponents   
-                    this.$info_zone.html(`<h1>You Won!!!</h1>`);    // Display winning message
+                    this.$info_zone.html(`<h1>You Won!!!<br><br><button type="button" id="restart">RESTART</button></h1>`);    // Display winning message
                 }
             } 
             else {  // If opponent still has health, get hit.
@@ -151,10 +146,16 @@
         },
         check_lose(indexOf_user){
             if( this.characters[indexOf_user].health < 0 ){ // If user ran out of health
-                this.$info_zone.html(`<h1>You Lost<br>Game Over!</h1><br><button type="button" id="restart">RESTART</button>`); // Inform the user
+                this.$info_zone.html(`<h1>You Lost<br>Game Over!<br><br><button type="button" id="restart">RESTART</button></h1>`); // Inform the user
             }
+        },
+        restart(){
+            location.reload();
+        },
+        ta_instructions(){
+            console.log(`If you want to lose, pick the Hobbit as your player and the Orc as your first opponent`);
+            console.log(`I think all other choices will result in a win`);
         }
-
     }
 
     game.init();
