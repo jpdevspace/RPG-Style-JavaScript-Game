@@ -1,6 +1,3 @@
-// Set all variables and inital values
-
-
 (function($) {
     // Non-DOM-ready-required code here (scope-safe)
     $(function() {
@@ -154,11 +151,6 @@
             console.log(`I think all other choices will result in a win`);
         }
     }
-
     game.init();
-
-
-
-
     });
 })(jQuery); 
