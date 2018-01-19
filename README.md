@@ -1,4 +1,4 @@
-# week-4-game
+# RPG-Style-JavaScript-Game
 
 Interactive JavaScript game. 
 
@@ -8,7 +8,7 @@ Technologies used for this project: HTML, CSS and jQuery.
 
 ![alt text][screenshot]
 
-[screenshot]: https://github.com/jpdevspace/week-4-game/blob/master/assets/imgs/gameScreenshot.png "Game Screenshot"
+[screenshot]: https://github.com/jpdevspace/RPG-Style-JavaScript-Game/blob/master/assets/imgs/gameScreenshot.png "Game Screenshot"
 
 ### INSTRUCTIONS
 
