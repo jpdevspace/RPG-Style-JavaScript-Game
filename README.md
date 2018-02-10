@@ -2,7 +2,7 @@
 
 Interactive JavaScript game. 
 
-## You can see it live here: https://jpdevspace.github.io/week-4-game/.
+## You can see it live here: https://jpdevspace.github.io/RPG-Style-JavaScript-Game/
 
 Technologies used for this project: HTML, CSS and jQuery. 
 
